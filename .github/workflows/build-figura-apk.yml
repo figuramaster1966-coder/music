@@ -27,7 +27,7 @@ jobs:
       - name: Install Android platform
         run: |
           echo "Using SDK at ${ANDROID_HOME}"
-          SDKMANAGER="$(find \"${ANDROID_HOME}/cmdline-tools\" -type f -name sdkmanager | head -n 1)"
+          SDKMANAGER="$(find "$ANDROID_HOME/cmdline-tools" -type f -name sdkmanager | head -n 1)"
           echo "SDK manager: ${SDKMANAGER}"
           test -n "${SDKMANAGER}"
           yes | "${SDKMANAGER}" --licenses >/dev/null || true
