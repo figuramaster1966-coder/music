@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.content.res.Configuration;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,6 +134,21 @@ public final class MainActivity extends Activity {
             }
         });
         loadFreshHome();
+    }
+
+    // Handle rotation without destroying the current WebView or stopping audio.
+    // The manifest delegates orientation and screen-size changes to this Activity.
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (webView != null) {
+            webView.requestLayout();
+            webView.invalidate();
+        }
+        if (Build.VERSION.SDK_INT >= 35) {
+            View root = findViewById(R.id.root);
+            if (root != null) root.requestApplyInsets();
+        }
     }
 
     private boolean isInternal(Uri uri) {
