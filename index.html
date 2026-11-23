@@ -386,10 +386,9 @@ render();</script><script id="fm-dynamic-release-headline">
     root.querySelectorAll('.fm-engagement[data-file]').forEach(box => {
       const file = box.dataset.file;
       const item = stats[file] || {};
-      const numPlays = box.querySelector('.fm-play-number');
+      // Public Atlas shows likes only. Plays are still counted for the owner's report.
       const numLikes = box.querySelector('.fm-like-number');
       const like = box.querySelector('.fm-like-button');
-      numPlays.textContent = digits(item.plays);
       numLikes.textContent = digits(item.likes);
       like.disabled = !api || !connected || busy.has(file);
       like.classList.toggle('is-liked', likedTracks.has(file));
@@ -409,10 +408,7 @@ render();</script><script id="fm-dynamic-release-headline">
       box.className = 'fm-engagement';
       box.dataset.file = file;
       box.dataset.title = name;
-      box.innerHTML = '<span class="fm-pill fm-play-pill" title="Полные прослушивания">'
-        + '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>'
-        + '<span class="fm-play-number">—</span><small>прослушиваний</small></span>'
-        + '<button class="fm-pill fm-like-button" type="button" aria-pressed="false" title="Поставить лайк">'
+      box.innerHTML = '<button class="fm-pill fm-like-button" type="button" aria-pressed="false" title="Поставить лайк">'
         + '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>'
         + '<span class="fm-like-number">—</span><small>лайков</small></button>';
       anchor.insertAdjacentElement('afterend', box);
