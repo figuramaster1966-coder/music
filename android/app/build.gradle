@@ -13,14 +13,6 @@ android {
         versionCode 3
         versionName '1.0.2'
     }
-    // Dedicated side-by-side rotation test: does not replace the installed app.
-    buildTypes {
-        debug {
-            applicationIdSuffix '.rotationtest'
-            versionNameSuffix '-rotation-test'
-        }
-    }
-
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
